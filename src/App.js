@@ -7,15 +7,6 @@ function App() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
 
-  useEffect(() => {
-    axios.get('https://ai-app-backend-j6fk.onrender.com/api/history/' + userId).then(res => {
-      const data = Array.isArray(res.data) ? res.data : res.data.messages || [];
-      setMessages(data);
-    }).catch(err => {
-      console.error('Error fetching history:', err);
-      setMessages([]);
-    });
-  }, []);
 
   const sendMessage = async () => {
     if (!input.trim()) return;
@@ -38,10 +29,21 @@ function App() {
     setInput('');
   };
 
+  useEffect(() => {
+    // axios.get('https://ai-app-backend-j6fk.onrender.com/api/history/' + userId).then(res => {
+    //   const data = Array.isArray(res.data) ? res.data : res.data.messages || [];
+    //   setMessages(data);
+    // }).catch(err => {
+    //   console.error('Error fetching history:', err);
+    //   setMessages([]);
+    // });
+    sendMessage()
+  }, []);
+
   return (
     <div className="h-screen flex">
       <div className="w-1/3 bg-gray-100 p-4">
-        <h2 className="text-xl font-bold">Journal Assistant</h2>
+        <h2 className="text-xl font-bold"> AI Journal Assistant</h2>
       </div>
       <div className="w-2/3 flex flex-col">
         <div className="flex-1 p-4 overflow-y-auto">
